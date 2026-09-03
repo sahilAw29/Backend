@@ -90,7 +90,7 @@ function cleanData(obj) {
 }
 
 const APIs = [
-  { name: "tg",      url: "https://felix-true.onrender.com/user?key=felixbhai&tg={username}",         method:"GET", description:"Telegram username to number lookup" },
+  { name: "tg",      url: "https://rootx-osint.in/?type=tg_num&key=Billaa&query={username}",         method:"GET", description:"Telegram username to number lookup" },
   { name: "leakpro",  url: "https://l34k-osint.onrender.com/search?key=c53ba1cd6eb1518d95c4f648055beac6&query={query}",    method:"GET", description:"Leak OSINT query lookup"            },
   { name: "num2",     url: "https://scrape-9vmt.onrender.com/multiapi?key=SAHIL&num={number}",         method:"GET", description:"Mobile number intelligence"         },
   { name: "num",      url: "https://leakapi.dpdns.org/search?q={number}",                             method:"GET", description:"Database number search"             },
