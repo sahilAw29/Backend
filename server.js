@@ -104,7 +104,7 @@ const APIs = [
   { name: "veh-info", url: "https://ftosint.world/api/veh2num?key=sahil-new&vehicle={vehicle}",    method:"GET", description:"Vehicle registration details"       },
   { name: "veh",      url: "https://ftosint.world/api/vehicle?key=sahil-new&vehicle={vehicle}",      method:"GET", description:"Detailed vehicle intelligence"      },
   { name: "rc",       url: "https://vvvin-ng.vercel.app/lookup?rc={vehicle}",              method:"GET", description:"RC registration lookup"             },
-  { name: "insta",    url: "https://scrape-9vmt.onrender.com/multiapi?key=SAHIL&insta={username}",     method:"GET", description:"Instagram account intelligence"     },
+  { name: "insta",    url: "https://igexport.com/api/ig-profile?username={username}",     method:"GET", description:"Instagram account intelligence"     },
   { name: "git",      url: "https://ft-osint-api.duckdns.org/api/git?key=sahil-new&username={username}", method:"GET", description:"GitHub profile intelligence"   },
   { name: "bgmi",     url: "https://ft-osint-api.duckdns.org/api/bgmi?key=sahil-new&uid={uid}",      method:"GET", description:"BGMI player ID lookup"              },
   { name: "ff",       url: "https://ft-osint-api.duckdns.org/api/ff?key=sahil-new&uid={uid}",        method:"GET", description:"Free Fire player ID lookup"         },
