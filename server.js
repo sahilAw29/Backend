@@ -109,7 +109,7 @@ const APIs = [
   { name: "bgmi",     url: "https://ft-osint-api.duckdns.org/api/bgmi?key=sahil-new&uid={uid}",      method:"GET", description:"BGMI player ID lookup"              },
   { name: "ff",       url: "https://ft-osint-api.duckdns.org/api/ff?key=sahil-new&uid={uid}",        method:"GET", description:"Free Fire player ID lookup"         },
   { name: "ifsc",     url: "https://ft-osint-api.duckdns.org/api/ifsc?key=sahil-new&ifsc={ifsc}",    method:"GET", description:"Bank IFSC code lookup"              },
-  { name: "pan",      url: "https://ft-osint-api.duckdns.org/api/pan?key=sahil-new&pan={pan}",       method:"GET", description:"PAN card intelligence lookup"       },
+  { name: "pan",      url: "https://ftosint.world/api/paninfo?key=randi-family&pan={pan}",       method:"GET", description:"PAN card intelligence lookup"       },
   { name: "ip",       url: "https://ft-osint-api.duckdns.org/api/ip?key=sahil-new&ip={ip}",          method:"GET", description:"IP geolocation intelligence"        },
   { name: "pin",      url: "https://ft-osint-api.duckdns.org/api/pincode?key=sahil-new&pin={pincode}",method:"GET", description:"Postal pincode lookup"             },
   { name: "snap",     url: "https://b-c-a-i.vercel.app/profile/{username}",                           method:"GET", description:"Snapchat profile intelligence"      },
