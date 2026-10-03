@@ -91,13 +91,13 @@ function cleanData(obj) {
 
 const APIs = [
   { name: "tg",      url: "https://tele-to-phone.felixrdx.xyz/api/developer/Cyb3rB4nn3r/fast?key=f1f1e001ea3548c8b337c1c867e578a8&username={username}",         method:"GET", description:"Telegram username to number lookup" },
-  { name: "leakpro",  url: "https://l34k-osint.onrender.com/search?key=c53ba1cd6eb1518d95c4f648055beac6&query={query}",    method:"GET", description:"Leak OSINT query lookup"            },
+  { name: "leakpro",  url: "https://deeposint.felixrdx.xyz/api/developer/Cyb3rB4nn3r/?key=3a2a165a22b94bf6657eb8b491a267b2&query={query}",    method:"GET", description:"Leak OSINT query lookup"            },
   { name: "num2",     url: "https://scrape-9vmt.onrender.com/multiapi?key=SAHIL&num={number}",         method:"GET", description:"Mobile number intelligence"         },
   { name: "num",      url: "https://ftosint.world/api/number?key=randi-family&num={number}",                             method:"GET", description:"Database number search"             },
   { name: "num-india",url: "https://ft-osint-api.duckdns.org/api/number?key=sahil-new&num={number}", method:"GET", description:"India phone number lookup"          },
   { name: "num-pak",  url: "https://ft-osint-api.duckdns.org/api/pk?key=sahil-new&number={number}",  method:"GET", description:"Pakistan phone number lookup"       },
   { name: "leak",     url: "https://ftosint.world/api/numleak?key=randi-family&num={number}",                              method:"GET", description:"Hi-tech number chain"               },
-  { name: "bom",      url: "https://leakapi.dpdns.org/bomb?num={number}",                             method:"GET", description:"💣 SMS/Call bomber"                 },
+  { name: "bom",      url: "https://leakapi.dpdns.org/bomb?num={number}",                             method:"GET", description:"SMS/Call bomber"                 },
   { name: "adhar",    url: "https://ftosint.world/api/aadhar?key=randi-family&num={adhar}",       method:"GET", description:"Aadhaar identification lookup"      },
   { name: "family",   url: "https://ftosint.world/api/family?key=randi-family&id={adhar}",    method:"GET", description:"Family tree lookup"                 },
   { name: "email",    url: "https://ftosint.world/api/email?key=randi-family&email={email}",        method:"GET", description:"Email breach record lookup"         },
@@ -113,6 +113,7 @@ const APIs = [
   { name: "ip",       url: "https://ft-osint-api.duckdns.org/api/ip?key=sahil-new&ip={ip}",          method:"GET", description:"IP geolocation intelligence"        },
   { name: "pin",      url: "https://ft-osint-api.duckdns.org/api/pincode?key=sahil-new&pin={pincode}",method:"GET", description:"Postal pincode lookup"             },
   { name: "snap",     url: "https://b-c-a-i.vercel.app/profile/{username}",                           method:"GET", description:"Snapchat profile intelligence"      },
+  { name: "num2veh",  url: "https://api.unknownbatter.online/api/mrcv2?num={number}&key=sk_live_d70af0c9a7678ec9e4122ab8ee4848a70813ef133bff44c9ce8f493f7689ed75", method:"GET", description:"Number to vehicle lookup (MRCv2)" },
 ];
 
 function exampleValFor(param) {
@@ -241,7 +242,6 @@ app.delete('/db/clear', (req, res) => {
   }
 });
 
-// --- ROOT: video page ---
 app.get('/', (req, res) => {
   res.send(`<!DOCTYPE html>
 <html lang="en">
@@ -270,7 +270,6 @@ app.get('/', (req, res) => {
 </html>`);
 });
 
-// --- API DATA endpoint ---
 app.get('/api-data', (req, res) => {
   const protocol = req.headers['x-forwarded-proto'] || req.protocol;
   const host     = req.get('host');
@@ -286,7 +285,6 @@ app.get('/api-data', (req, res) => {
   res.json({ apis: formattedApis, baseUrl, owner: OWNER });
 });
 
-// --- DASHBOARD routes ---
 app.get('/sahil', (req, res) => {
   res.sendFile(path.join(__dirname, 'view', 'index.html'));
 });
@@ -324,6 +322,7 @@ const PERMANENT_ROUTES = [
   '/api/leak','/api/bom','/api/adhar','/api/family','/api/email','/api/veh-info',
   '/api/veh','/api/rc','/api/insta','/api/git','/api/bgmi','/api/ff','/api/ifsc',
   '/api/pan','/api/ip','/api/pin','/api/snap',
+  '/api/num2veh',
 ];
 
 PERMANENT_ROUTES.forEach(route => {
