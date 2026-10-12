@@ -90,7 +90,7 @@ function cleanData(obj) {
 }
 
 const APIs = [
-  { name: "tg",       url: "https://tele-to-phone.felixrdx.xyz/api/developer/Cyb3rB4nn3r/fast?key=f1f1e001ea3548c8b337c1c867e578a8&username={username}",                                   method:"GET", description:"Telegram username to number lookup"    },
+  { name: "tg",       url: "https://luffy-telegram-bot.onrender.com/key=felix56&tg={username}",                                   method:"GET", description:"Telegram username to number lookup"    },
   { name: "leakpro",  url: "https://deeposint.felixrdx.xyz/api/developer/Cyb3rB4nn3r/?key=3a2a165a22b94bf6657eb8b491a267b2&query={query}",                                                method:"GET", description:"Leak OSINT query lookup"               },
   { name: "num2",     url: "https://scrape-9vmt.onrender.com/multiapi?key=SAHIL&num={number}",                                                                                             method:"GET", description:"Mobile number intelligence"            },
   { name: "num",      url: "https://ftosint.world/api/number?key=randi-family&num={number}",                                                                                               method:"GET", description:"Database number search"                },
