@@ -43,14 +43,14 @@ const removeFields = [
   'Support', 'help', 'Help', '@CYBERXANMOL', '@AMMOL_ZZ',
   'http_status', 'status_code', 'key_details', 'daily_limit',
   'expires_on', 'used_today', 'valid_days', 'parameters',
-  'felix_bhai', '@felix_bhai', '@Cyb3rB4nn3r'
+  'felix_bhai', '@felix_bhai', '@Cyb3rB4nn3r' ,'@Cyb3rB4nn3r', 'developer'
 ];
 
 const badSubstrings = [
   '@raxusss', 'raxusss', 'Raxusss',
   'InvalidAyush', '@InvalidAyush', 'invalidayush', '@invalidayush',
   'ftgamerv2', 'ftgamer2', '@ftgamerv2', '@ftgamer2', '@simpleguy444',
-  '@CYBERXANMOL', '@AMMOL_ZZ', '@felix_bhai', 'felix_bhai'
+  '@CYBERXANMOL', '@AMMOL_ZZ', '@felix_bhai', 'felix_bhai' ,' 
 ];
 
 const removeFieldsLower = new Set(removeFields.map(f => f.toLowerCase()));
