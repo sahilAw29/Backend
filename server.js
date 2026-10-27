@@ -50,7 +50,7 @@ const badSubstrings = [
   '@raxusss', 'raxusss', 'Raxusss',
   'InvalidAyush', '@InvalidAyush', 'invalidayush', '@invalidayush',
   'ftgamerv2', 'ftgamer2', '@ftgamerv2', '@ftgamer2', '@simpleguy444',
-  '@CYBERXANMOL', '@AMMOL_ZZ', '@felix_bhai', 'felix_bhai' ,' 
+  '@CYBERXANMOL', '@AMMOL_ZZ', '@felix_bhai', 'felix_bhai'
 ];
 
 const removeFieldsLower = new Set(removeFields.map(f => f.toLowerCase()));
