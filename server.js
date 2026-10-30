@@ -90,30 +90,42 @@ function cleanData(obj) {
 }
 
 const APIs = [
-  { name: "tg",       url: "https://tele-to-phone.felixrdx.xyz/api/developer/Cyb3rB4nn3r/fast?key=6051223b2f1c424bbf9257b371506d52&username={username}",                                   method:"GET", description:"Telegram username to number lookup"    },
-  { name: "leakpro",  url: "https://deeposint.felixrdx.xyz/api/developer/Cyb3rB4nn3r/?key=3a2a165a22b94bf6657eb8b491a267b2&query={query}",                                                method:"GET", description:"Leak OSINT query lookup"               },
-  { name: "num2",     url: "https://scrape-9vmt.onrender.com/multiapi?key=SAHIL&num={number}",                                                                                             method:"GET", description:"Mobile number intelligence"            },
-  { name: "num",      url: "https://ftosint.world/api/number?key=randi-family&num={number}",                                                                                               method:"GET", description:"Database number search"                },
-  { name: "num-india",url: "https://ft-osint-api.duckdns.org/api/number?key=sahil-new&num={number}",                                                                                      method:"GET", description:"India phone number lookup"             },
-  { name: "num-pak",  url: "https://ft-osint-api.duckdns.org/api/pk?key=sahil-new&number={number}",                                                                                       method:"GET", description:"Pakistan phone number lookup"          },
-  { name: "leak",     url: "https://ftosint.world/api/numleak?key=randi-family&num={number}",                                                                                              method:"GET", description:"Hi-tech number chain"                  },
-  { name: "bom",      url: "https://leakapi.dpdns.org/bomb?num={number}",                                                                                                                  method:"GET", description:"SMS/Call bomber"                       },
-  { name: "adhar",    url: "https://ftosint.world/api/aadhar?key=randi-family&num={adhar}",                                                                                                method:"GET", description:"Aadhaar identification lookup"         },
-  { name: "family",   url: "https://ftosint.world/api/family?key=randi-family&id={adhar}",                                                                                                 method:"GET", description:"Family tree lookup"                    },
-  { name: "email",    url: "https://ftosint.world/api/email?key=randi-family&email={email}",                                                                                               method:"GET", description:"Email breach record lookup"            },
-  { name: "veh-info", url: "https://ftosint.world/api/vehicle?key=randi-family&vehicle={vehicle}",                                                                                        method:"GET", description:"Vehicle registration details"          },
-  { name: "veh2num",      url: "https://ftosint.world/api/veh2num?key=randi-family&vehicle={vehicle}",                                                                                        method:"GET", description:"Detailed vehicle intelligence"         },
-  { name: "rc",       url: "https://vvvin-ng.vercel.app/lookup?rc={vehicle}",                                                                                                              method:"GET", description:"RC registration lookup"                },
-  { name: "insta",    url: "https://auraxinfo.up.railway.app/api/insta?key=edb7cdabef7b72a6&username={username}",                                                                                        method:"GET", description:"Instagram account intelligence"        },
-  { name: "git",      url: "https://ft-osint-api.duckdns.org/api/git?key=sahil-new&username={username}",                                                                                  method:"GET", description:"GitHub profile intelligence"           },
-  { name: "bgmi",     url: "https://ft-osint-api.duckdns.org/api/bgmi?key=sahil-new&uid={uid}",                                                                                           method:"GET", description:"BGMI player ID lookup"                 },
-  { name: "ff",       url: "https://ft-osint-api.duckdns.org/api/ff?key=sahil-new&uid={uid}",                                                                                             method:"GET", description:"Free Fire player ID lookup"            },
-  { name: "ifsc",     url: "https://ft-osint-api.duckdns.org/api/ifsc?key=sahil-new&ifsc={ifsc}",                                                                                        method:"GET", description:"Bank IFSC code lookup"                 },
-  { name: "pan",      url: "https://ftosint.world/api/paninfo?key=randi-family&pan={pan}",                                                                                                 method:"GET", description:"PAN card intelligence lookup"          },
-  { name: "ip",       url: "https://ft-osint-api.duckdns.org/api/ip?key=sahil-new&ip={ip}",                                                                                               method:"GET", description:"IP geolocation intelligence"           },
-  { name: "pin",      url: "https://ft-osint-api.duckdns.org/api/pincode?key=sahil-new&pin={pincode}",                                                                                    method:"GET", description:"Postal pincode lookup"                 },
-  { name: "snap",     url: "https://b-c-a-i.vercel.app/profile/{username}",                                                                                                               method:"GET", description:"Snapchat profile intelligence"         },
-  { name: "num2veh",  url: "https://api.unknownbatter.online/api/mrcv2?num={number}&key=sk_live_d70af0c9a7678ec9e4122ab8ee4848a70813ef133bff44c9ce8f493f7689ed75",                        method:"GET", description:"Number to vehicle lookup (MRCv2)"      },
+  { name: "tg",         url: "https://tele-to-phone.felixrdx.xyz/api/developer/Cyb3rB4nn3r/fast?key=6051223b2f1c424bbf9257b371506d52&username={username}",                                method:"GET", description:"Telegram username to number lookup"    },
+  { name: "leakpro",    url: "https://deeposint.felixrdx.xyz/api/developer/Cyb3rB4nn3r/?key=3a2a165a22b94bf6657eb8b491a267b2&query={query}",                                           method:"GET", description:"Leak OSINT query lookup"               },
+  { name: "num2",       url: "https://scrape-9vmt.onrender.com/multiapi?key=SAHIL&num={number}",                                                                                        method:"GET", description:"Mobile number intelligence"            },
+  { name: "num",        url: "https://ftosint.world/api/number?key=randi-family&num={number}",                                                                                          method:"GET", description:"Database number search"                },
+  { name: "num-india",  url: "https://ft-osint-api.duckdns.org/api/number?key=sahil-new&num={number}",                                                                                  method:"GET", description:"India phone number lookup"             },
+  { name: "num-pak",    url: "https://ftosint.world/api/pk?key=randi-family&num={number}",                                                                                              method:"GET", description:"Pakistan phone number lookup"          },
+  { name: "leak",       url: "https://ftosint.world/api/numleak?key=randi-family&num={number}",                                                                                         method:"GET", description:"Hi-tech number chain"                  },
+  { name: "bom",        url: "http://3.25.117.170:6081/bomb?num={number}",                                                                                                              method:"GET", description:"SMS/Call bomber"                       },
+  { name: "adhar",      url: "https://ftosint.world/api/aadhar?key=randi-family&num={adhar}",                                                                                           method:"GET", description:"Aadhaar identification lookup"         },
+  { name: "family",     url: "https://ftosint.world/api/family?key=randi-family&id={adhar}",                                                                                            method:"GET", description:"Family tree lookup"                    },
+  { name: "email",      url: "https://ftosint.world/api/email?key=randi-family&email={email}",                                                                                          method:"GET", description:"Email breach record lookup"            },
+  { name: "veh-info",   url: "https://ftosint.world/api/vehicle?key=randi-family&vehicle={vehicle}",                                                                                    method:"GET", description:"Vehicle registration details"          },
+  { name: "veh2num",    url: "https://ftosint.world/api/veh2num?key=randi-family&vehicle={vehicle}",                                                                                    method:"GET", description:"Detailed vehicle intelligence"         },
+  { name: "rc",         url: "https://vvvin-ng.vercel.app/lookup?rc={vehicle}",                                                                                                         method:"GET", description:"RC registration lookup"                },
+  { name: "insta",      url: "https://auraxinfo.up.railway.app/api/insta?key=edb7cdabef7b72a6&username={username}",                                                                     method:"GET", description:"Instagram account intelligence"        },
+  { name: "git",        url: "https://ftosint.world/api/git?key=randi-family&username={username}",                                                                                      method:"GET", description:"GitHub profile intelligence"           },
+  { name: "bgmi",       url: "https://ft-osint-api.duckdns.org/api/bgmi?key=sahil-new&uid={uid}",                                                                                       method:"GET", description:"BGMI player ID lookup"                 },
+  { name: "ff",         url: "https://ft-osint-api.duckdns.org/api/ff?key=sahil-new&uid={uid}",                                                                                         method:"GET", description:"Free Fire player ID lookup"            },
+  { name: "ifsc",       url: "https://ftosint.world/api/ifsc?key=randi-family&ifsc={ifsc}",                                                                                             method:"GET", description:"Bank IFSC code lookup"                 },
+  { name: "pan",        url: "https://ftosint.world/api/paninfo?key=randi-family&pan={pan}",                                                                                             method:"GET", description:"PAN card intelligence lookup"          },
+  { name: "ip",         url: "https://ftosint.world/api/ip?key=randi-family&ip={ip}",                                                                                                   method:"GET", description:"IP geolocation intelligence"           },
+  { name: "pin",        url: "https://ftosint.world/api/pincode?key=randi-family&pin={pincode}",                                                                                        method:"GET", description:"Postal pincode lookup"                 },
+  { name: "snap",       url: "https://b-c-a-i.vercel.app/profile/{username}",                                                                                                           method:"GET", description:"Snapchat profile intelligence"         },
+  { name: "num2veh",    url: "https://api.unknownbatter.online/api/mrcv2?num={number}&key=sk_live_d70af0c9a7678ec9e4122ab8ee4848a70813ef133bff44c9ce8f493f7689ed75",                   method:"GET", description:"Number to vehicle lookup (MRCv2)"      },
+  // ── NEW APIs ──────────────────────────────────────────────────────────────
+  { name: "upi",        url: "https://ftosint.world/api/upi?key=randi-family&upi={upi}",                                                                                                method:"GET", description:"UPI ID verification"                   },
+  { name: "fastag",     url: "https://ftosint.world/api/fastag?key=randi-family&vehicle={vehicle}",                                                                                     method:"GET", description:"FASTag vehicle lookup"                 },
+  { name: "challan",    url: "https://ftosint.world/api/challan?key=randi-family&vehicle={vehicle}",                                                                                    method:"GET", description:"Vehicle challan lookup"                },
+  { name: "adv",        url: "https://ftosint.world/api/adv?key=randi-family&num={number}",                                                                                             method:"GET", description:"Number to info V2 (advanced)"          },
+  { name: "pan-gst",    url: "https://ftosint.world/api/pan?key=randi-family&pan={pan}",                                                                                                method:"GET", description:"PAN to GST lookup"                     },
+  { name: "gstin",      url: "https://ftosint.world/api/gstin?key=randi-family&gstin={gstin}",                                                                                          method:"GET", description:"GSTIN to info lookup"                  },
+  { name: "name2gstin", url: "https://ftosint.world/api/name2gstin?key=randi-family&name={name}",                                                                                       method:"GET", description:"Name to GSTIN lookup"                  },
+  { name: "nametoinfo", url: "https://ftosint.world/api/nametoinfo?key=randi-family&name={name}",                                                                                       method:"GET", description:"Name to info lookup"                   },
+  { name: "gstreturns", url: "https://ftosint.world/api/gstreturns?key=randi-family&gstin={gstin}&financial_year=2023-24",                                                              method:"GET", description:"GST returns lookup"                    },
+  { name: "gstin2pan",  url: "https://ftosint.world/api/gstin2pan?key=randi-family&gstin={gstin}",                                                                                      method:"GET", description:"GSTIN to PAN lookup"                   },
+  { name: "namesearch", url: "https://ftosint.world/api/namesearch?key=randi-family&q={q}&from={from}",                                                                                 method:"GET", description:"Name search by location"               },
 ];
 
 function exampleValFor(param) {
@@ -127,7 +139,12 @@ function exampleValFor(param) {
   if (param.includes('adhar') || param.includes('aadhar')) return '123456789012';
   if (param.includes('uid'))      return '123456789';
   if (param.includes('ip'))       return '8.8.8.8';
-  if (param.includes('quiry') || param.includes('query') || param === 'q') return 'test@example.com';
+  if (param.includes('upi'))      return 'elvishrao@okicici';
+  if (param.includes('gstin'))    return '07AABCF8078M1Z3';
+  if (param === 'name')           return 'RAHUL';
+  if (param === 'from')           return 'Delhi';
+  if (param === 'q')              return 'Ramesh';
+  if (param.includes('quiry') || param.includes('query')) return 'test@example.com';
   return '12345678';
 }
 
@@ -288,6 +305,245 @@ app.get('/api-data', (req, res) => {
   res.json({ apis: formattedApis, baseUrl, owner: OWNER });
 });
 
+// ── /sahil/api — All endpoints UI ────────────────────────────────────────────
+app.get('/sahil/api', (req, res) => {
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+  const host     = req.get('host');
+  const baseUrl  = `${protocol}://${host}`;
+
+  const categoryIcons = {
+    number: '📞', phone: '📞', num: '📞', mobile: '📞',
+    email: '📧', mail: '📧',
+    vehicle: '🚘', veh: '🚘', rc: '🚘', car: '🚘', fastag: '💳', challan: '🧾',
+    pan: '🪪', gstin: '🏢', gst: '🏢', tax: '🏢',
+    adhar: '🆔', aadhar: '🆔', family: '👨‍👩‍👧',
+    insta: '📸', instagram: '📸',
+    git: '🐙', github: '🐙',
+    ip: '🌐', pin: '📍', pincode: '📍',
+    snap: '👻', snapchat: '👻',
+    leak: '🔎', leakpro: '🔎',
+    tg: '✈️', telegram: '✈️',
+    bgmi: '🎮', ff: '🎮', game: '🎮',
+    ifsc: '🏦', bank: '🏦', upi: '💳',
+    name: '👤', namesearch: '👤',
+    bom: '💣'
+  };
+
+  function getIcon(name, desc) {
+    const n = name.toLowerCase();
+    const d = (desc || '').toLowerCase();
+    for (const [k, v] of Object.entries(categoryIcons)) {
+      if (n.includes(k) || d.includes(k)) return v;
+    }
+    return '🔍';
+  }
+
+  const apiCards = registeredAPIs.map(api => {
+    const icon = getIcon(api.name, api.description);
+    const exUrl = `${baseUrl}/api/${api.name}?${api.exampleQuery}`;
+    const params = api.requiredParams.map(p =>
+      `<span class="param-badge">{${p}}</span>`
+    ).join(' ');
+    return `
+    <div class="card">
+      <div class="card-header">
+        <span class="icon">${icon}</span>
+        <div class="card-title">
+          <span class="ep-name">/api/${api.name}</span>
+          <span class="method-badge">${api.method}</span>
+        </div>
+      </div>
+      <p class="desc">${api.description}</p>
+      ${params ? `<div class="params">${params}</div>` : ''}
+      <div class="example-box">
+        <span class="ex-label">Example</span>
+        <a class="ex-url" href="${exUrl}" target="_blank">${exUrl}</a>
+      </div>
+      <div class="card-actions">
+        <button class="btn-copy" onclick="copyUrl('${exUrl}')">📋 Copy</button>
+        <a class="btn-test" href="${exUrl}" target="_blank">⚡ Test</a>
+      </div>
+    </div>`;
+  }).join('');
+
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>OSINT API — All Endpoints</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #1e1e2e;
+    --accent: #7c3aed;
+    --accent2: #06b6d4;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --green: #22c55e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a0a2e 50%, #0a1628 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: 1px;
+    background: linear-gradient(90deg, #a78bfa, #38bdf8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .stats-row { display:flex; justify-content:center; gap:24px; margin-top:14px; flex-wrap:wrap; }
+  .stat { background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.25);
+    border-radius:8px; padding:6px 18px; font-size:0.82rem; }
+  .stat span { color:#a78bfa; font-weight:700; margin-right:4px; }
+
+  /* SEARCH */
+  .search-wrap { padding: 20px 24px 0; max-width:1400px; margin:0 auto; }
+  .search-box {
+    width:100%; padding:12px 20px; border-radius:12px;
+    background:var(--surface); border:1px solid var(--border);
+    color:var(--text); font-size:0.95rem; outline:none;
+    transition: border-color .2s;
+  }
+  .search-box:focus { border-color:var(--accent); }
+  .search-box::placeholder { color:var(--muted); }
+
+  /* GRID */
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:16px; padding:20px 24px 40px; max-width:1400px; margin:0 auto; }
+
+  /* CARD */
+  .card {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:18px; display:flex; flex-direction:column; gap:10px;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .card:hover { border-color:var(--accent); transform:translateY(-2px);
+    box-shadow: 0 8px 32px rgba(124,58,237,0.15); }
+
+  .card-header { display:flex; align-items:center; gap:12px; }
+  .icon { font-size:1.5rem; flex-shrink:0; }
+  .card-title { display:flex; flex-direction:column; gap:3px; min-width:0; }
+  .ep-name { font-weight:700; font-size:0.9rem; color:#a78bfa;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .method-badge { display:inline-block; background:rgba(6,182,212,0.15);
+    color:var(--accent2); border:1px solid rgba(6,182,212,0.3);
+    border-radius:4px; padding:1px 8px; font-size:0.7rem; font-weight:700;
+    letter-spacing:.5px; width:fit-content; }
+
+  .desc { font-size:0.82rem; color:var(--muted); line-height:1.4; }
+
+  .params { display:flex; flex-wrap:wrap; gap:5px; }
+  .param-badge { background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.25);
+    color:#c4b5fd; border-radius:6px; padding:2px 8px; font-size:0.72rem;
+    font-family:monospace; }
+
+  .example-box { background:var(--surface); border-radius:8px; padding:8px 12px;
+    border:1px solid var(--border); }
+  .ex-label { display:block; font-size:0.68rem; color:var(--muted); margin-bottom:3px;
+    text-transform:uppercase; letter-spacing:.5px; }
+  .ex-url { font-size:0.72rem; color:#38bdf8; word-break:break-all;
+    text-decoration:none; font-family:monospace; }
+  .ex-url:hover { text-decoration:underline; }
+
+  .card-actions { display:flex; gap:8px; margin-top:2px; }
+  .btn-copy, .btn-test {
+    flex:1; padding:8px; border-radius:8px; border:none; cursor:pointer;
+    font-size:0.78rem; font-weight:600; text-align:center; text-decoration:none;
+    transition: opacity .15s;
+  }
+  .btn-copy { background:rgba(124,58,237,0.18); color:#a78bfa;
+    border:1px solid rgba(124,58,237,0.3); }
+  .btn-test  { background:rgba(6,182,212,0.15); color:var(--accent2);
+    border:1px solid rgba(6,182,212,0.3); display:flex; align-items:center;
+    justify-content:center; }
+  .btn-copy:hover, .btn-test:hover { opacity:.75; }
+
+  /* TOAST */
+  .toast { position:fixed; bottom:24px; right:24px; background:#22c55e; color:#fff;
+    padding:10px 20px; border-radius:10px; font-size:0.85rem; font-weight:600;
+    transform:translateY(80px); opacity:0; transition:.3s; z-index:999; }
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  /* NO RESULTS */
+  .no-results { text-align:center; color:var(--muted); padding:60px 20px; font-size:1rem;
+    display:none; grid-column:1/-1; }
+
+  /* FOOTER */
+  .footer { text-align:center; padding:16px; color:var(--muted); font-size:0.78rem;
+    border-top:1px solid var(--border); }
+  .footer a { color:#a78bfa; text-decoration:none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚡ OSINT API Hub</h1>
+  <p>All available endpoints — ${OWNER}</p>
+  <div class="stats-row">
+    <div class="stat"><span>${registeredAPIs.length}</span>Endpoints</div>
+    <div class="stat"><span id="visibleCount">${registeredAPIs.length}</span>Showing</div>
+    <div class="stat"><span>REST</span>Protocol</div>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <input class="search-box" id="searchBox" type="text"
+    placeholder="🔍  Search endpoints, descriptions, or params..."
+    oninput="filterCards(this.value)" autocomplete="off"/>
+</div>
+
+<div class="grid" id="grid">
+  ${apiCards}
+  <div class="no-results" id="noResults">😕 No endpoints found for your search.</div>
+</div>
+
+<div class="footer">
+  Powered by <a href="/sahil" target="_blank">${OWNER}</a> &nbsp;|&nbsp;
+  <a href="/analytics" target="_blank">Analytics</a> &nbsp;|&nbsp;
+  <a href="/api-data" target="_blank">JSON</a>
+</div>
+
+<div class="toast" id="toast">✅ Copied!</div>
+
+<script>
+  const cards = [...document.querySelectorAll('.card')];
+  const noRes = document.getElementById('noResults');
+  const countEl = document.getElementById('visibleCount');
+
+  function filterCards(q) {
+    q = q.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(c => {
+      const text = c.innerText.toLowerCase();
+      const show = !q || text.includes(q);
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    noRes.style.display = visible === 0 ? 'block' : 'none';
+    countEl.textContent = visible;
+  }
+
+  function copyUrl(url) {
+    navigator.clipboard.writeText(url).then(() => {
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    });
+  }
+</script>
+</body>
+</html>`);
+});
+
 app.get('/sahil',   (req, res) => res.sendFile(path.join(__dirname, 'view', 'index.html')));
 app.get('/nazriya', (req, res) => res.sendFile(path.join(__dirname, 'view', 'index.html')));
 
@@ -320,6 +576,9 @@ const PERMANENT_ROUTES = [
   '/api/leak', '/api/bom', '/api/adhar', '/api/family', '/api/email', '/api/veh-info',
   '/api/veh', '/api/rc', '/api/insta', '/api/git', '/api/bgmi', '/api/ff', '/api/ifsc',
   '/api/pan', '/api/ip', '/api/pin', '/api/snap', '/api/num2veh',
+  '/api/upi', '/api/fastag', '/api/challan', '/api/adv', '/api/pan-gst',
+  '/api/gstin', '/api/name2gstin', '/api/nametoinfo', '/api/gstreturns',
+  '/api/gstin2pan', '/api/namesearch',
 ];
 
 PERMANENT_ROUTES.forEach(route => {
@@ -340,7 +599,7 @@ app.all('/api/:endpoint', async (req, res) => {
       return res.status(404).json({
         success: false,
         error: "Endpoint not found",
-        message: `The endpoint '/api/${endpointName}' does not exist. Visit /sahil to see available endpoints.`
+        message: `The endpoint '/api/${endpointName}' does not exist. Visit /sahil/api to see all endpoints.`
       });
     }
 
@@ -357,7 +616,7 @@ app.all('/api/:endpoint', async (req, res) => {
       const fallbackKeys = [
         'query','q','number','num','adhar','aadhar','email','vehicle',
         'registration_number','username','user','uid','id','ifsc','pan',
-        'ip','pincode','pin','term','quiry'
+        'ip','pincode','pin','term','quiry','upi','gstin','name','from'
       ];
       for (const key of fallbackKeys) {
         if (inputParams[key] !== undefined && inputParams[key] !== '') {
@@ -375,10 +634,14 @@ app.all('/api/:endpoint', async (req, res) => {
       });
     }
 
+    // ── Multi-param URL build: each param gets its own value from query ──────
     let finalUpstreamUrl = apiConfig.url;
     const encodedVal = encodeURIComponent(targetValue);
     apiConfig.requiredParams.forEach(param => {
-      finalUpstreamUrl = finalUpstreamUrl.replace(new RegExp(`\\{${param}\\}`, 'g'), encodedVal);
+      const paramVal = (inputParams[param] !== undefined && inputParams[param] !== '')
+        ? encodeURIComponent(inputParams[param])
+        : encodedVal;
+      finalUpstreamUrl = finalUpstreamUrl.replace(new RegExp(`\\{${param}\\}`, 'g'), paramVal);
     });
 
     const axiosConfig = {
@@ -399,7 +662,6 @@ app.all('/api/:endpoint', async (req, res) => {
     const response = await axios(axiosConfig);
     const execTime = Date.now() - startTime;
 
-    // ── CORE FIX: string → JSON parse attempt ────────────────────────────────
     if (typeof response.data === 'string') {
       try { response.data = JSON.parse(response.data); } catch(e) { /* keep as string */ }
     }
@@ -409,7 +671,6 @@ app.all('/api/:endpoint', async (req, res) => {
       return res.status(500).json({ success: false, error: "API returned no data", owner: OWNER });
     }
 
-    // only block if it's STILL a string AND starts with actual HTML
     if (typeof response.data === 'string' && response.data.trimStart().startsWith('<!DOCTYPE html>')) {
       logQuery(endpointName, usedParam, targetValue, 500, {}, "HTML error page", req.ip, execTime);
       return res.status(500).json({ success: false, error: "API returned HTML error page", owner: OWNER });
