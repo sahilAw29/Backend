@@ -43,7 +43,11 @@ const removeFields = [
   'Support', 'help', 'Help', '@CYBERXANMOL', '@AMMOL_ZZ',
   'http_status', 'status_code', 'key_details', 'daily_limit',
   'expires_on', 'used_today', 'valid_days', 'parameters',
-  'felix_bhai', '@felix_bhai', '@Cyb3rB4nn3r' ,'@Cyb3rB4nn3r', 'developer'
+  'felix_bhai', '@felix_bhai', '@Cyb3rB4nn3r', 'Cyb3rB4nn3r',
+  // ── NEW: upstream meta noise ──────────────────────────────────────────────
+  'remaining_searches', 'req_left', 'req_total', 'expiry',
+  'cached', 'quota', 'rate_limit', 'requests_remaining',
+  'plan', 'plan_type', 'api_key', 'success', 'timestamp'
 ];
 
 const badSubstrings = [
@@ -52,6 +56,18 @@ const badSubstrings = [
   'ftgamerv2', 'ftgamer2', '@ftgamerv2', '@ftgamer2', '@simpleguy444',
   '@CYBERXANMOL', '@AMMOL_ZZ', '@felix_bhai', 'felix_bhai'
 ];
+
+const STRIP_RESPONSE_KEYS = new Set([
+  'remaining_searches', 'req_left', 'req_total', 'expiry',
+  'cached', 'success', 'http_status', 'status_code',
+  'key_details', 'daily_limit', 'expires_on', 'used_today',
+  'valid_days', 'parameters', 'api_key', 'plan', 'plan_type',
+  'rate_limit', 'requests_remaining', 'quota', 'timestamp',
+  'owner', 'channel', 'telegram', 'contact', 'credit', 'credits',
+  'source', 'provider', 'developer', 'dev', 'support', 'help',
+  'created_by', 'createdby', 'owner_username', 'owner_channel',
+  'website', 'github', 'twitter', 'facebook', 'fb', 'instagram'
+]);
 
 const removeFieldsLower = new Set(removeFields.map(f => f.toLowerCase()));
 
@@ -89,8 +105,18 @@ function cleanData(obj) {
   }
 }
 
+function stripMeta(obj) {
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return obj;
+  const out = {};
+  for (const [k, v] of Object.entries(obj)) {
+    if (STRIP_RESPONSE_KEYS.has(k.toLowerCase())) continue;
+    out[k] = (v && typeof v === 'object' && !Array.isArray(v)) ? stripMeta(v) : v;
+  }
+  return out;
+}
+
 const APIs = [
-  { name: "tg",         url: "https://rootx-osint.in/?type=tg_num&key=Billaa&query={username}",                                method:"GET", description:"Telegram username to number lookup"    },
+  { name: "tg",         url: "https://rootx-osint.in/?type=tg_num&key=Billaa&query={username}",                                                                                        method:"GET", description:"Telegram username to number lookup"    },
   { name: "leakpro",    url: "https://deeposint.felixrdx.xyz/api/developer/Cyb3rB4nn3r/?key=3a2a165a22b94bf6657eb8b491a267b2&query={query}",                                           method:"GET", description:"Leak OSINT query lookup"               },
   { name: "num2",       url: "https://scrape-9vmt.onrender.com/multiapi?key=SAHIL&num={number}",                                                                                        method:"GET", description:"Mobile number intelligence"            },
   { name: "num",        url: "https://ftosint.world/api/number?key=randi-family&num={number}",                                                                                          method:"GET", description:"Database number search"                },
@@ -114,7 +140,6 @@ const APIs = [
   { name: "pin",        url: "https://ftosint.world/api/pincode?key=randi-family&pin={pincode}",                                                                                        method:"GET", description:"Postal pincode lookup"                 },
   { name: "snap",       url: "https://b-c-a-i.vercel.app/profile/{username}",                                                                                                           method:"GET", description:"Snapchat profile intelligence"         },
   { name: "num2veh",    url: "https://api.unknownbatter.online/api/mrcv2?num={number}&key=sk_live_d70af0c9a7678ec9e4122ab8ee4848a70813ef133bff44c9ce8f493f7689ed75",                   method:"GET", description:"Number to vehicle lookup (MRCv2)"      },
-  // ── NEW APIs ──────────────────────────────────────────────────────────────
   { name: "upi",        url: "https://ftosint.world/api/upi?key=randi-family&upi={upi}",                                                                                                method:"GET", description:"UPI ID verification"                   },
   { name: "fastag",     url: "https://ftosint.world/api/fastag?key=randi-family&vehicle={vehicle}",                                                                                     method:"GET", description:"FASTag vehicle lookup"                 },
   { name: "challan",    url: "https://ftosint.world/api/challan?key=randi-family&vehicle={vehicle}",                                                                                    method:"GET", description:"Vehicle challan lookup"                },
@@ -305,7 +330,6 @@ app.get('/api-data', (req, res) => {
   res.json({ apis: formattedApis, baseUrl, owner: OWNER });
 });
 
-// ── /sahil/api — All endpoints UI ────────────────────────────────────────────
 app.get('/sahil/api', (req, res) => {
   const protocol = req.headers['x-forwarded-proto'] || req.protocol;
   const host     = req.get('host');
@@ -374,27 +398,15 @@ app.get('/sahil/api', (req, res) => {
 <title>OSINT API — All Endpoints</title>
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --card: #16161f;
-    --border: #1e1e2e;
-    --accent: #7c3aed;
-    --accent2: #06b6d4;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --green: #22c55e;
+    --bg: #0a0a0f; --surface: #111118; --card: #16161f; --border: #1e1e2e;
+    --accent: #7c3aed; --accent2: #06b6d4; --text: #e2e8f0; --muted: #64748b; --green: #22c55e;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
-
-  /* HEADER */
   .header {
     background: linear-gradient(135deg, #0f0f1a 0%, #1a0a2e 50%, #0a1628 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 28px 24px 20px;
-    text-align: center;
-    position: sticky; top: 0; z-index: 100;
-    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 28px 24px 20px;
+    text-align: center; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
   }
   .header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: 1px;
     background: linear-gradient(90deg, #a78bfa, #38bdf8);
@@ -404,23 +416,16 @@ app.get('/sahil/api', (req, res) => {
   .stat { background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.25);
     border-radius:8px; padding:6px 18px; font-size:0.82rem; }
   .stat span { color:#a78bfa; font-weight:700; margin-right:4px; }
-
-  /* SEARCH */
   .search-wrap { padding: 20px 24px 0; max-width:1400px; margin:0 auto; }
   .search-box {
     width:100%; padding:12px 20px; border-radius:12px;
     background:var(--surface); border:1px solid var(--border);
-    color:var(--text); font-size:0.95rem; outline:none;
-    transition: border-color .2s;
+    color:var(--text); font-size:0.95rem; outline:none; transition: border-color .2s;
   }
   .search-box:focus { border-color:var(--accent); }
   .search-box::placeholder { color:var(--muted); }
-
-  /* GRID */
   .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
     gap:16px; padding:20px 24px 40px; max-width:1400px; margin:0 auto; }
-
-  /* CARD */
   .card {
     background:var(--card); border:1px solid var(--border); border-radius:14px;
     padding:18px; display:flex; flex-direction:column; gap:10px;
@@ -428,7 +433,6 @@ app.get('/sahil/api', (req, res) => {
   }
   .card:hover { border-color:var(--accent); transform:translateY(-2px);
     box-shadow: 0 8px 32px rgba(124,58,237,0.15); }
-
   .card-header { display:flex; align-items:center; gap:12px; }
   .icon { font-size:1.5rem; flex-shrink:0; }
   .card-title { display:flex; flex-direction:column; gap:3px; min-width:0; }
@@ -438,14 +442,10 @@ app.get('/sahil/api', (req, res) => {
     color:var(--accent2); border:1px solid rgba(6,182,212,0.3);
     border-radius:4px; padding:1px 8px; font-size:0.7rem; font-weight:700;
     letter-spacing:.5px; width:fit-content; }
-
   .desc { font-size:0.82rem; color:var(--muted); line-height:1.4; }
-
   .params { display:flex; flex-wrap:wrap; gap:5px; }
   .param-badge { background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.25);
-    color:#c4b5fd; border-radius:6px; padding:2px 8px; font-size:0.72rem;
-    font-family:monospace; }
-
+    color:#c4b5fd; border-radius:6px; padding:2px 8px; font-size:0.72rem; font-family:monospace; }
   .example-box { background:var(--surface); border-radius:8px; padding:8px 12px;
     border:1px solid var(--border); }
   .ex-label { display:block; font-size:0.68rem; color:var(--muted); margin-bottom:3px;
@@ -453,38 +453,28 @@ app.get('/sahil/api', (req, res) => {
   .ex-url { font-size:0.72rem; color:#38bdf8; word-break:break-all;
     text-decoration:none; font-family:monospace; }
   .ex-url:hover { text-decoration:underline; }
-
   .card-actions { display:flex; gap:8px; margin-top:2px; }
   .btn-copy, .btn-test {
     flex:1; padding:8px; border-radius:8px; border:none; cursor:pointer;
     font-size:0.78rem; font-weight:600; text-align:center; text-decoration:none;
     transition: opacity .15s;
   }
-  .btn-copy { background:rgba(124,58,237,0.18); color:#a78bfa;
-    border:1px solid rgba(124,58,237,0.3); }
+  .btn-copy { background:rgba(124,58,237,0.18); color:#a78bfa; border:1px solid rgba(124,58,237,0.3); }
   .btn-test  { background:rgba(6,182,212,0.15); color:var(--accent2);
-    border:1px solid rgba(6,182,212,0.3); display:flex; align-items:center;
-    justify-content:center; }
+    border:1px solid rgba(6,182,212,0.3); display:flex; align-items:center; justify-content:center; }
   .btn-copy:hover, .btn-test:hover { opacity:.75; }
-
-  /* TOAST */
   .toast { position:fixed; bottom:24px; right:24px; background:#22c55e; color:#fff;
     padding:10px 20px; border-radius:10px; font-size:0.85rem; font-weight:600;
     transform:translateY(80px); opacity:0; transition:.3s; z-index:999; }
   .toast.show { transform:translateY(0); opacity:1; }
-
-  /* NO RESULTS */
   .no-results { text-align:center; color:var(--muted); padding:60px 20px; font-size:1rem;
     display:none; grid-column:1/-1; }
-
-  /* FOOTER */
   .footer { text-align:center; padding:16px; color:var(--muted); font-size:0.78rem;
     border-top:1px solid var(--border); }
   .footer a { color:#a78bfa; text-decoration:none; }
 </style>
 </head>
 <body>
-
 <div class="header">
   <h1>⚡ OSINT API Hub</h1>
   <p>All available endpoints — ${OWNER}</p>
@@ -494,31 +484,25 @@ app.get('/sahil/api', (req, res) => {
     <div class="stat"><span>REST</span>Protocol</div>
   </div>
 </div>
-
 <div class="search-wrap">
   <input class="search-box" id="searchBox" type="text"
     placeholder="🔍  Search endpoints, descriptions, or params..."
     oninput="filterCards(this.value)" autocomplete="off"/>
 </div>
-
 <div class="grid" id="grid">
   ${apiCards}
   <div class="no-results" id="noResults">😕 No endpoints found for your search.</div>
 </div>
-
 <div class="footer">
   Powered by <a href="/sahil" target="_blank">${OWNER}</a> &nbsp;|&nbsp;
   <a href="/analytics" target="_blank">Analytics</a> &nbsp;|&nbsp;
   <a href="/api-data" target="_blank">JSON</a>
 </div>
-
 <div class="toast" id="toast">✅ Copied!</div>
-
 <script>
   const cards = [...document.querySelectorAll('.card')];
   const noRes = document.getElementById('noResults');
   const countEl = document.getElementById('visibleCount');
-
   function filterCards(q) {
     q = q.toLowerCase().trim();
     let visible = 0;
@@ -531,7 +515,6 @@ app.get('/sahil/api', (req, res) => {
     noRes.style.display = visible === 0 ? 'block' : 'none';
     countEl.textContent = visible;
   }
-
   function copyUrl(url) {
     navigator.clipboard.writeText(url).then(() => {
       const t = document.getElementById('toast');
@@ -634,7 +617,6 @@ app.all('/api/:endpoint', async (req, res) => {
       });
     }
 
-    // ── Multi-param URL build: each param gets its own value from query ──────
     let finalUpstreamUrl = apiConfig.url;
     const encodedVal = encodeURIComponent(targetValue);
     apiConfig.requiredParams.forEach(param => {
@@ -668,26 +650,27 @@ app.all('/api/:endpoint', async (req, res) => {
 
     if (!response.data) {
       logQuery(endpointName, usedParam, targetValue, 500, {}, "No data returned", req.ip, execTime);
-      return res.status(500).json({ success: false, error: "API returned no data", owner: OWNER });
+      return res.status(500).json({ error: "API returned no data", owner: OWNER });
     }
 
     if (typeof response.data === 'string' && response.data.trimStart().startsWith('<!DOCTYPE html>')) {
       logQuery(endpointName, usedParam, targetValue, 500, {}, "HTML error page", req.ip, execTime);
-      return res.status(500).json({ success: false, error: "API returned HTML error page", owner: OWNER });
+      return res.status(500).json({ error: "API returned HTML error page", owner: OWNER });
     }
 
-    let cleaned = cleanData(response.data);
+    // ── Double-layer clean: removeFields + STRIP_RESPONSE_KEYS ───────────────
+    let cleaned = stripMeta(cleanData(response.data));
 
     if (!cleaned || (typeof cleaned === 'object' && Object.keys(cleaned).length === 0)) {
       logQuery(endpointName, usedParam, targetValue, 404, cleaned, "Empty response", req.ip, execTime);
-      return res.status(404).json({ success: false, error: "No data found", owner: OWNER });
+      return res.status(404).json({ error: "No data found", owner: OWNER });
     }
 
+    // ── Inject only owner, nothing else ──────────────────────────────────────
     if (cleaned && typeof cleaned === 'object' && !Array.isArray(cleaned)) {
-      cleaned.owner     = OWNER;
-      cleaned.timestamp = new Date().toISOString();
+      cleaned.owner = OWNER;
     } else {
-      cleaned = { data: cleaned, owner: OWNER, timestamp: new Date().toISOString() };
+      cleaned = { data: cleaned, owner: OWNER };
     }
 
     logQuery(endpointName, usedParam, targetValue, response.status, cleaned, null, req.ip, execTime);
@@ -705,8 +688,10 @@ app.all('/api/:endpoint', async (req, res) => {
     }
     logQuery(req.params.endpoint, null, null, 500, {}, errorMessage, req.ip, execTime);
     return res.status(500).json({
-      success: false, error: "Gateway execution error",
-      message: errorMessage, details: errorDetails, owner: OWNER
+      error: "Gateway execution error",
+      message: errorMessage,
+      details: errorDetails,
+      owner: OWNER
     });
   }
 });
